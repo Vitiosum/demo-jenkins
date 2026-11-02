@@ -1,0 +1,193 @@
+{
+ "_class": "org.jenkinsci.plugins.workflow.job.WorkflowJob",
+ "builds": [
+  {
+   "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+   "actions": [
+    {
+     "_class": "hudson.model.ParametersAction"
+    },
+    {
+     "_class": "hudson.model.CauseAction",
+     "causes": [
+      {
+       "_class": "hudson.model.Cause$UserIdCause"
+      }
+     ]
+    },
+    {
+     "_class": "hudson.plugins.git.util.BuildData",
+     "lastBuiltRevision": {
+      "SHA1": "195259f45d5e35d9ae64ee26eb9bf1efe5ca8516"
+     }
+    },
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+    },
+    {
+     "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+    },
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+    },
+    {},
+    {}
+   ],
+   "building": false,
+   "duration": 5308,
+   "number": 4,
+   "result": "SUCCESS",
+   "timestamp": 1793572198849
+  },
+  {
+   "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+   "actions": [
+    {
+     "_class": "hudson.model.ParametersAction"
+    },
+    {
+     "_class": "hudson.model.CauseAction",
+     "causes": [
+      {
+       "_class": "hudson.model.Cause$UserIdCause"
+      }
+     ]
+    },
+    {
+     "_class": "hudson.plugins.git.util.BuildData",
+     "lastBuiltRevision": {
+      "SHA1": "b5e77078bc610c4bffa3d1a7153b2ac470f93623"
+     }
+    },
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+    },
+    {
+     "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+    },
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+    },
+    {},
+    {}
+   ],
+   "building": false,
+   "duration": 3075,
+   "number": 3,
+   "result": "FAILURE",
+   "timestamp": 1793572178814
+  },
+  {
+   "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+   "actions": [
+    {
+     "_class": "hudson.model.ParametersAction"
+    },
+    {
+     "_class": "hudson.model.CauseAction",
+     "causes": [
+      {
+       "_class": "hudson.model.Cause$UserIdCause"
+      }
+     ]
+    },
+    {
+     "_class": "hudson.plugins.git.util.BuildData",
+     "lastBuiltRevision": {
+      "SHA1": "d9290c0d3acea4beb68de9c4830d97763fef733c"
+     }
+    },
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+    },
+    {
+     "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+    },
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+    },
+    {},
+    {}
+   ],
+   "building": false,
+   "duration": 5222,
+   "number": 2,
+   "result": "FAILURE",
+   "timestamp": 1793572163797
+  },
+  {
+   "_class": "org.jenkinsci.plugins.workflow.job.WorkflowRun",
+   "actions": [
+    {
+     "_class": "hudson.model.ParametersAction"
+    },
+    {
+     "_class": "hudson.model.CauseAction",
+     "causes": [
+      {
+       "_class": "hudson.model.Cause$UserIdCause"
+      }
+     ]
+    },
+    {
+     "_class": "hudson.plugins.git.util.BuildData",
+     "lastBuiltRevision": {
+      "SHA1": "006f0adb2db0383f67b7683c4a97a813cb5d6b55"
+     }
+    },
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.workflow.libs.LibrariesAction"
+    },
+    {},
+    {},
+    {},
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.displayurlapi.actions.RunDisplayAction"
+    },
+    {
+     "_class": "org.jenkinsci.plugins.pipeline.modeldefinition.actions.RestartDeclarativePipelineAction"
+    },
+    {},
+    {
+     "_class": "org.jenkinsci.plugins.workflow.job.views.FlowGraphAction"
+    },
+    {},
+    {}
+   ],
+   "building": false,
+   "duration": 22155,
+   "number": 1,
+   "result": "SUCCESS",
+   "timestamp": 1793572043673
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+# Build outputs and CI toolchains
+/dist/
+/bin/
+/.tools/
+/demo-jenkins
+
+# Local configuration and secrets
+.env*
+!.env.example
+.clever.json
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

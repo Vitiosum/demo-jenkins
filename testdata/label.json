@@ -1,0 +1,10 @@
+{
+ "_class": "hudson.model.labels.LabelAtom",
+ "clouds": [],
+ "nodes": [
+  {
+   "_class": "hudson.model.Hudson",
+   "nodeName": ""
+  }
+ ]
+}

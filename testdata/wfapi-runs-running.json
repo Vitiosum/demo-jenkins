@@ -1,0 +1,372 @@
+[
+ {
+  "_links": {
+   "self": {
+    "href": "/job/assembly-line/5/wfapi/describe"
+   }
+  },
+  "id": "5",
+  "name": "#5",
+  "status": "IN_PROGRESS",
+  "startTimeMillis": 1793572278984,
+  "endTimeMillis": 1793572280548,
+  "durationMillis": 1564,
+  "queueDurationMillis": 9,
+  "pauseDurationMillis": 0,
+  "stages": [
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/5/execution/node/8/wfapi/describe"
+     }
+    },
+    "id": "8",
+    "name": "Checkout",
+    "execNode": "",
+    "status": "SUCCESS",
+    "startTimeMillis": 1793572279602,
+    "durationMillis": 590,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/5/execution/node/14/wfapi/describe"
+     }
+    },
+    "id": "14",
+    "name": "Test",
+    "execNode": "",
+    "status": "IN_PROGRESS",
+    "startTimeMillis": 1793572280239,
+    "durationMillis": 308,
+    "pauseDurationMillis": 0
+   }
+  ]
+ },
+ {
+  "_links": {
+   "self": {
+    "href": "/job/assembly-line/4/wfapi/describe"
+   },
+   "changesets": {
+    "href": "/job/assembly-line/4/wfapi/changesets"
+   }
+  },
+  "id": "4",
+  "name": "#4",
+  "status": "SUCCESS",
+  "startTimeMillis": 1793572198858,
+  "endTimeMillis": 1793572204166,
+  "durationMillis": 5308,
+  "queueDurationMillis": 9,
+  "pauseDurationMillis": 0,
+  "stages": [
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/4/execution/node/8/wfapi/describe"
+     }
+    },
+    "id": "8",
+    "name": "Checkout",
+    "execNode": "",
+    "status": "SUCCESS",
+    "startTimeMillis": 1793572199578,
+    "durationMillis": 636,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/4/execution/node/14/wfapi/describe"
+     }
+    },
+    "id": "14",
+    "name": "Test",
+    "execNode": "",
+    "status": "SUCCESS",
+    "startTimeMillis": 1793572200256,
+    "durationMillis": 1503,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/4/execution/node/20/wfapi/describe"
+     }
+    },
+    "id": "20",
+    "name": "Build",
+    "execNode": "",
+    "status": "SUCCESS",
+    "startTimeMillis": 1793572201803,
+    "durationMillis": 2040,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/4/execution/node/26/wfapi/describe"
+     }
+    },
+    "id": "26",
+    "name": "Deploy",
+    "execNode": "",
+    "status": "NOT_EXECUTED",
+    "startTimeMillis": 1793572203883,
+    "durationMillis": 104,
+    "pauseDurationMillis": 0
+   }
+  ]
+ },
+ {
+  "_links": {
+   "self": {
+    "href": "/job/assembly-line/3/wfapi/describe"
+   },
+   "changesets": {
+    "href": "/job/assembly-line/3/wfapi/changesets"
+   }
+  },
+  "id": "3",
+  "name": "#3",
+  "status": "FAILED",
+  "startTimeMillis": 1793572178825,
+  "endTimeMillis": 1793572181900,
+  "durationMillis": 3075,
+  "queueDurationMillis": 11,
+  "pauseDurationMillis": 0,
+  "stages": [
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/3/execution/node/8/wfapi/describe"
+     }
+    },
+    "id": "8",
+    "name": "Checkout",
+    "execNode": "",
+    "status": "SUCCESS",
+    "startTimeMillis": 1793572179502,
+    "durationMillis": 825,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/3/execution/node/14/wfapi/describe"
+     }
+    },
+    "id": "14",
+    "name": "Test",
+    "execNode": "",
+    "status": "FAILED",
+    "error": {
+     "message": "script returned exit code 1",
+     "type": "hudson.AbortException"
+    },
+    "startTimeMillis": 1793572180369,
+    "durationMillis": 954,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/3/execution/node/20/wfapi/describe"
+     }
+    },
+    "id": "20",
+    "name": "Build",
+    "execNode": "",
+    "status": "FAILED",
+    "error": {
+     "message": "script returned exit code 1",
+     "type": "hudson.AbortException"
+    },
+    "startTimeMillis": 1793572181382,
+    "durationMillis": 108,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/3/execution/node/25/wfapi/describe"
+     }
+    },
+    "id": "25",
+    "name": "Deploy",
+    "execNode": "",
+    "status": "FAILED",
+    "error": {
+     "message": "script returned exit code 1",
+     "type": "hudson.AbortException"
+    },
+    "startTimeMillis": 1793572181542,
+    "durationMillis": 118,
+    "pauseDurationMillis": 0
+   }
+  ]
+ },
+ {
+  "_links": {
+   "self": {
+    "href": "/job/assembly-line/2/wfapi/describe"
+   },
+   "changesets": {
+    "href": "/job/assembly-line/2/wfapi/changesets"
+   }
+  },
+  "id": "2",
+  "name": "#2",
+  "status": "FAILED",
+  "startTimeMillis": 1793572163809,
+  "endTimeMillis": 1793572169031,
+  "durationMillis": 5222,
+  "queueDurationMillis": 12,
+  "pauseDurationMillis": 0,
+  "stages": [
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/2/execution/node/8/wfapi/describe"
+     }
+    },
+    "id": "8",
+    "name": "Checkout",
+    "execNode": "",
+    "status": "SUCCESS",
+    "startTimeMillis": 1793572164526,
+    "durationMillis": 661,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/2/execution/node/14/wfapi/describe"
+     }
+    },
+    "id": "14",
+    "name": "Test",
+    "execNode": "",
+    "status": "FAILED",
+    "error": {
+     "message": "script returned exit code 1",
+     "type": "hudson.AbortException"
+    },
+    "startTimeMillis": 1793572165233,
+    "durationMillis": 2671,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/2/execution/node/20/wfapi/describe"
+     }
+    },
+    "id": "20",
+    "name": "Build",
+    "execNode": "",
+    "status": "FAILED",
+    "error": {
+     "message": "script returned exit code 1",
+     "type": "hudson.AbortException"
+    },
+    "startTimeMillis": 1793572167958,
+    "durationMillis": 131,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/2/execution/node/25/wfapi/describe"
+     }
+    },
+    "id": "25",
+    "name": "Deploy",
+    "execNode": "",
+    "status": "FAILED",
+    "error": {
+     "message": "script returned exit code 1",
+     "type": "hudson.AbortException"
+    },
+    "startTimeMillis": 1793572168148,
+    "durationMillis": 150,
+    "pauseDurationMillis": 0
+   }
+  ]
+ },
+ {
+  "_links": {
+   "self": {
+    "href": "/job/assembly-line/1/wfapi/describe"
+   }
+  },
+  "id": "1",
+  "name": "#1",
+  "status": "SUCCESS",
+  "startTimeMillis": 1793572043688,
+  "endTimeMillis": 1793572065843,
+  "durationMillis": 22155,
+  "queueDurationMillis": 15,
+  "pauseDurationMillis": 0,
+  "stages": [
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/1/execution/node/8/wfapi/describe"
+     }
+    },
+    "id": "8",
+    "name": "Checkout",
+    "execNode": "",
+    "status": "SUCCESS",
+    "startTimeMillis": 1793572049733,
+    "durationMillis": 838,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/1/execution/node/14/wfapi/describe"
+     }
+    },
+    "id": "14",
+    "name": "Test",
+    "execNode": "",
+    "status": "SUCCESS",
+    "startTimeMillis": 1793572050615,
+    "durationMillis": 1858,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/1/execution/node/20/wfapi/describe"
+     }
+    },
+    "id": "20",
+    "name": "Build",
+    "execNode": "",
+    "status": "SUCCESS",
+    "startTimeMillis": 1793572052525,
+    "durationMillis": 12868,
+    "pauseDurationMillis": 0
+   },
+   {
+    "_links": {
+     "self": {
+      "href": "/job/assembly-line/1/execution/node/26/wfapi/describe"
+     }
+    },
+    "id": "26",
+    "name": "Deploy",
+    "execNode": "",
+    "status": "NOT_EXECUTED",
+    "startTimeMillis": 1793572065436,
+    "durationMillis": 207,
+    "pauseDurationMillis": 0
+   }
+  ]
+ }
+]

@@ -1,0 +1,21 @@
+#!/bin/sh
+# Runs clever-tools (pinned) from its standalone Linux/macOS binary.
+# Authentication comes from CLEVER_TOKEN and CLEVER_SECRET, bound by Jenkins.
+set -eu
+version="${CLEVER_VERSION:?set CLEVER_VERSION}"
+here="$(cd "$(dirname "$0")/.." && pwd)"
+bin="$here/.tools/clever-$version/clever"
+
+if [ ! -x "$bin" ]; then
+  case "$(uname -s)" in
+    Linux) os=linux ;;
+    Darwin) os=macos ;;
+    *) echo "ci/clever: unsupported OS $(uname -s)" >&2; exit 1 ;;
+  esac
+  echo "ci/clever: installing clever-tools $version ($os) into .tools/" >&2
+  mkdir -p "$here/.tools/clever-$version"
+  curl -fsSL "https://clever-tools.clever-cloud.com/releases/$version/clever-tools-${version}_$os.tar.gz" |
+    tar -xz -C "$here/.tools/clever-$version" --strip-components=1
+fi
+
+exec "$bin" "$@"

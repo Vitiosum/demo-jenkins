@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#13172e">
+<meta name="description" content="Jenkins on Clever Cloud tests and deploys this page. Every build rides an assembly line.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600&family=Big+Shoulders:opsz,wght@10..72,500..800&family=Big+Shoulders+Stencil:opsz,wght@10..72,600..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{asset "cc-brand.css"}}">
+<link rel="stylesheet" href="{{asset "floor.css"}}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 101 116'%3E%3Cpolygon fill='%23AB2B4A' points='100.423 29.134 100.423 86.868 89.721 73.062 83.76 58.003 83.756 58.003 89.418 42.731'/%3E%3Cpolygon fill='%23E87A68' points='.429 29.134 .429 86.868 9.889 73.481 17.092 58.003 17.096 58.003 9.773 43.319'/%3E%3Cpolygon fill='%23D74D4E' points='83.756 58.003 52.241 60.003 17.092 58.003 31.76 29.134 50.426 .269 70.722 31.961'/%3E%3Cpolygon fill='%23BD3246' points='100.423 29.134 83.756 58.003 50.426 .269'/%3E%3Cpolygon fill='%23F19175' points='50.426 .269 17.092 58.003 .425 29.134'/%3E%3Cpolygon fill='%23CF3942' points='83.756 58.003 72.365 82.931 50.426 115.737 27.849 81.83 17.092 58.003'/%3E%3Cpolygon fill='%23E0625B' points='50.426 115.737 .425 86.868 17.092 58.003'/%3E%3Cpolygon fill='%239A244F' points='50.422 115.737 100.423 86.868 83.756 58.003'/%3E%3C/svg%3E">
+<title>The Assembly Line · Jenkins on Clever Cloud</title>
+<script src="{{asset "app.js"}}" defer></script>
+</head>
+<body>
+
+<header class="cc-topbar">
+  <div class="cc-container cc-topbar__inner">
+    <a href="https://www.clever.cloud" target="_blank" rel="noopener" aria-label="Clever Cloud">{{svg "cc-logo.svg"}}</a>
+    <span class="cc-topbar__sep"></span>
+    <div class="cc-topbar__demo"><small>Demo</small>Jenkins add-on</div>
+    <span class="cc-topbar__spacer"></span>
+    <nav class="cc-topbar__nav" aria-label="Status">
+      <span class="cc-pill cc-pill--mono cc-hide-sm">Go 1.27 · Jenkins LTS · Clever runners</span>
+      <span class="cc-pill cc-pill--live"><span class="cc-dot"></span>Live on Clever Cloud</span>
+      <a class="cc-pill cc-pill--gradient" href="https://academy.clever.cloud/" target="_blank" rel="noopener">Get certified ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  {{with .View}}
+  <section class="hall" id="hall" data-state="{{.State}}" data-andon="{{.Andon}}" aria-labelledby="hall-title">
+    <div class="hall__roof" aria-hidden="true"></div>
+
+    <div class="cc-container hall__head">
+      <h1 class="hall__title" id="hall-title">The Assembly Line</h1>
+      <div class="hall__intro">
+        <p class="hall__lead">Jenkins tests and deploys this very page. Every build is a crate on the belt: it is checked out, tested, pressed into a binary, then shipped through the dock to Clever Cloud.</p>
+        <div class="andon" role="status" aria-live="polite">
+          <span class="andon__stack" aria-hidden="true"><i class="is-red"></i><i class="is-amber"></i><i class="is-green"></i></span>
+          <p class="andon__text" id="andon-text">{{.Headline}}</p>
+          <div class="andon__side">
+            <span class="andon__fresh" id="andon-fresh">Read from Jenkins just now</span>
+            <button class="andon__btn" type="button" id="sample-btn" hidden>Play a sample run</button>
+            {{if .JenkinsURL}}<a class="andon__link" href="{{.JenkinsURL}}" target="_blank" rel="noopener" id="jenkins-link">Open Jenkins ↗</a>{{end}}
+          </div>
+        </div>
+      </div>
+
+      <aside class="nameplate" aria-label="The unit on display">
+        <span class="rivet"></span><span class="rivet"></span><span class="rivet"></span><span class="rivet"></span>
+        <p class="nameplate__kicker">Unit on display: this page</p>
+        <dl class="nameplate__rows">
+          <div><dt>Serial</dt><dd id="unit-commit">{{if .Unit.Commit}}{{.Unit.Commit}}{{else}}local{{end}}</dd></div>
+          <div><dt>Built by</dt><dd id="unit-build">{{if .Unit.ByTheLine}}build #{{.Unit.Build}}{{else}}by hand{{end}}</dd></div>
+        </dl>
+        <p class="nameplate__verdict" id="unit-verdict">{{.Unit.Verdict}}</p>
+      </aside>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="stage__drawing">
+      <svg class="line" viewBox="0 0 1200 330" role="img" aria-labelledby="line-title line-desc">
+        <title id="line-title">The assembly line</title>
+        <desc id="line-desc">A conveyor belt with four machines: goods in (checkout), quality control (test), the press (build) and the dock to Clever Cloud (deploy). A crate stamped with the build number moves along it.</desc>
+        <defs>
+          <linearGradient id="g-cone" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffc072" stop-opacity=".55"/>
+            <stop offset="1" stop-color="#ffb45e" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="g-pool" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#ffb45e" stop-opacity=".42"/>
+            <stop offset="1" stop-color="#ffb45e" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="g-scan" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7ff0b0" stop-opacity=".0"/>
+            <stop offset=".5" stop-color="#7ff0b0" stop-opacity=".28"/>
+            <stop offset="1" stop-color="#7ff0b0" stop-opacity=".0"/>
+          </linearGradient>
+          <linearGradient id="g-outside" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f57461"/>
+            <stop offset=".55" stop-color="#cb1c42"/>
+            <stop offset="1" stop-color="#a51050"/>
+          </linearGradient>
+          <pattern id="p-hazard" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="12" height="12" fill="#e9bc2c"/><rect width="6" height="12" fill="#1a1d1f"/>
+          </pattern>
+          <filter id="f-glow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="3.5"/>
+          </filter>
+          <clipPath id="c-door"><rect x="1004" y="150" width="92" height="150"/></clipPath>
+        </defs>
+
+        <!-- Pendant lamps, one above each station -->
+        <g class="lamps">
+          <g class="lamp" data-station="checkout"><polygon class="lamp__cone" points="132,56 168,56 270,300 30,300"/><ellipse class="lamp__pool" cx="150" cy="304" rx="120" ry="12"/><line x1="150" y1="20" x2="150" y2="40"/><polygon class="lamp__shade" points="142,40 158,40 172,56 128,56"/><ellipse class="lamp__bulb" cx="150" cy="57" rx="8" ry="3"/></g>
+          <g class="lamp" data-station="test"><polygon class="lamp__cone" points="432,56 468,56 570,300 330,300"/><ellipse class="lamp__pool" cx="450" cy="304" rx="120" ry="12"/><line x1="450" y1="20" x2="450" y2="40"/><polygon class="lamp__shade" points="442,40 458,40 472,56 428,56"/><ellipse class="lamp__bulb" cx="450" cy="57" rx="8" ry="3"/></g>
+          <g class="lamp" data-station="build"><polygon class="lamp__cone" points="732,56 768,56 870,300 630,300"/><ellipse class="lamp__pool" cx="750" cy="304" rx="120" ry="12"/><line x1="750" y1="20" x2="750" y2="40"/><polygon class="lamp__shade" points="742,40 758,40 772,56 728,56"/><ellipse class="lamp__bulb" cx="750" cy="57" rx="8" ry="3"/></g>
+          <g class="lamp" data-station="deploy"><polygon class="lamp__cone" points="1032,56 1068,56 1170,300 930,300"/><ellipse class="lamp__pool" cx="1050" cy="304" rx="120" ry="12"/><line x1="1050" y1="20" x2="1050" y2="40"/><polygon class="lamp__shade" points="1042,40 1058,40 1072,56 1028,56"/><ellipse class="lamp__bulb" cx="1050" cy="57" rx="8" ry="3"/></g>
+        </g>
+
+        <!-- Andon stack light -->
+        <g class="tower" transform="translate(40 0)">
+          <rect x="-2" y="176" width="4" height="124" class="steel-dark"/>
+          <rect x="-9" y="296" width="18" height="5" rx="1" class="steel-dark"/>
+          <rect x="-11" y="118" width="22" height="58" rx="3" class="tower__body"/>
+          <rect x="-9" y="121" width="18" height="16" rx="2" class="tower__lamp is-red"/>
+          <rect x="-9" y="139" width="18" height="16" rx="2" class="tower__lamp is-amber"/>
+          <rect x="-9" y="157" width="18" height="16" rx="2" class="tower__lamp is-green"/>
+        </g>
+
+        <!-- Station 1: goods in (checkout) -->
+        <g class="station" id="st-checkout" data-status="idle">
+          <line x1="98" y1="110" x2="98" y2="300" class="leg"/><line x1="202" y1="110" x2="202" y2="300" class="leg"/>
+          <g class="hopper">
+            <polygon points="88,92 212,92 172,164 128,164" class="machine"/>
+            <polygon points="88,92 212,92 208,100 92,100" class="machine-hi"/>
+            <polygon points="150,92 212,92 172,164 150,164" class="machine-shade"/>
+            <rect x="136" y="164" width="28" height="20" class="machine-shade"/>
+            <!-- a painted branch glyph: the repository the crate comes from -->
+            <g class="glyph"><circle cx="134" cy="112" r="4.5"/><circle cx="134" cy="142" r="4.5"/><circle cx="160" cy="122" r="4.5"/><path d="M134 116.5v21M160 126.5c0 8-26 4-26 12"/></g>
+          </g>
+          <circle cx="196" cy="108" r="5" class="status-lamp"/>
+        </g>
+
+        <!-- Station 2: quality control (test) -->
+        <g class="station" id="st-test" data-status="idle">
+          <rect x="392" y="138" width="14" height="130" class="machine-shade"/>
+          <rect x="494" y="138" width="14" height="130" class="machine-shade"/>
+          <rect x="384" y="118" width="132" height="22" rx="2" class="machine"/>
+          <rect x="384" y="118" width="132" height="5" rx="2" class="machine-hi"/>
+          <rect class="scan" x="406" y="140" width="88" height="106" fill="url(#g-scan)"/>
+          <line class="scan-line" x1="408" y1="146" x2="492" y2="146"/>
+          <g class="gauge">
+            <rect x="444" y="106" width="12" height="14" class="machine-shade"/>
+            <circle cx="450" cy="90" r="25" class="gauge__rim"/>
+            <circle cx="450" cy="90" r="20" class="gauge__face"/>
+            <path d="M436 99a17 17 0 0 1 3-21" class="gauge__arc is-fail"/>
+            <path d="M461 78a17 17 0 0 1 3 21" class="gauge__arc is-ok"/>
+            <g class="gauge__needle"><line x1="450" y1="90" x2="450" y2="74"/></g>
+            <circle cx="450" cy="90" r="2.6" class="gauge__pin"/>
+          </g>
+          <circle cx="504" cy="129" r="5" class="status-lamp"/>
+        </g>
+
+        <!-- Station 3: the press (build) -->
+        <g class="station" id="st-build" data-status="idle">
+          <rect x="700" y="104" width="14" height="164" class="machine-shade"/>
+          <rect x="786" y="104" width="14" height="164" class="machine-shade"/>
+          <rect x="690" y="76" width="120" height="32" rx="3" class="machine"/>
+          <rect x="690" y="76" width="120" height="6" rx="3" class="machine-hi"/>
+          <rect x="738" y="108" width="24" height="30" class="steel"/>
+          <g class="ram">
+            <rect x="745" y="130" width="10" height="30" class="steel-hi"/>
+            <rect x="714" y="158" width="72" height="16" rx="2" class="machine"/>
+            <rect x="714" y="170" width="72" height="4" fill="url(#p-hazard)"/>
+          </g>
+          <circle cx="796" cy="92" r="5" class="status-lamp"/>
+        </g>
+
+        <!-- Station 4: the dock to Clever Cloud (deploy) -->
+        <g class="station" id="st-deploy" data-status="idle">
+          <rect x="976" y="62" width="196" height="238" class="dock-wall"/>
+          <rect x="970" y="56" width="208" height="10" class="machine-shade"/>
+          <g class="outside" clip-path="url(#c-door)">
+            <rect x="1004" y="150" width="92" height="150" fill="url(#g-outside)"/>
+            <g class="outside__cloud"><circle cx="1036" cy="190" r="10"/><circle cx="1052" cy="182" r="14"/><circle cx="1068" cy="191" r="9"/><rect x="1026" y="188" width="52" height="12" rx="6"/></g>
+          </g>
+          <g class="door" clip-path="url(#c-door)"><g class="door__panel">
+            <rect x="1004" y="150" width="92" height="150" class="door__face"/>
+            <path d="M1004 165h92M1004 180h92M1004 195h92M1004 210h92M1004 225h92M1004 240h92M1004 255h92M1004 270h92M1004 285h92" class="door__slats"/>
+            <g transform="translate(1037 208) scale(.26)" class="door__mark">
+              <polygon fill="#AB2B4A" points="100.423 29.134 100.423 86.868 89.721 73.062 83.76 58.003 83.756 58.003 89.418 42.731"/><polygon fill="#E87A68" points=".429 29.134 .429 86.868 9.889 73.481 17.092 58.003 17.096 58.003 9.773 43.319"/><polygon fill="#D74D4E" points="83.756 58.003 52.241 60.003 17.092 58.003 31.76 29.134 50.426 .269 70.722 31.961"/><polygon fill="#BD3246" points="100.423 29.134 83.756 58.003 50.426 .269"/><polygon fill="#F19175" points="50.426 .269 17.092 58.003 .425 29.134"/><polygon fill="#CF3942" points="83.756 58.003 72.365 82.931 50.426 115.737 27.849 81.83 17.092 58.003"/><polygon fill="#E0625B" points="50.426 115.737 .425 86.868 17.092 58.003"/><polygon fill="#9A244F" points="50.422 115.737 100.423 86.868 83.756 58.003"/>
+            </g>
+          </g></g>
+          <rect x="994" y="142" width="10" height="158" fill="url(#p-hazard)"/>
+          <rect x="1096" y="142" width="10" height="158" fill="url(#p-hazard)"/>
+          <rect x="994" y="136" width="112" height="10" class="steel-dark"/>
+          <text x="1050" y="114" class="dock-sign">To Clever Cloud</text>
+          <circle cx="1140" cy="160" r="5" class="status-lamp"/>
+        </g>
+
+        <!-- The belt -->
+        <g class="belt">
+          <rect x="70" y="260" width="934" height="8" class="steel-dark"/>
+          <path d="M120 268v32M300 268v32M480 268v32M660 268v32M840 268v32" class="leg"/>
+          <rect x="56" y="246" width="954" height="14" rx="7" class="belt__body"/>
+          <line x1="64" y1="247.5" x2="1004" y2="247.5" class="belt__surface"/>
+          <g class="rollers">
+            <g class="roller" transform="translate(76 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(166 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(256 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(346 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(436 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(526 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(616 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(706 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(796 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(886 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+            <g class="roller" transform="translate(976 253)"><circle r="5"/><line x1="0" y1="0" x2="0" y2="-4"/></g>
+          </g>
+        </g>
+
+        <!-- The crate: one build of the product -->
+        <g class="crate" id="crate">
+          <g class="crate__body">
+            <rect width="64" height="52" rx="2" class="crate__wood"/>
+            <path d="M0 17h64M0 35h64" class="crate__plank"/>
+            <rect width="64" height="52" rx="2" class="crate__edge"/>
+            <text x="32" y="33" class="crate__label" id="crate-label">#0</text>
+            <g class="crate__stamp"><rect x="5" y="15" width="54" height="20" rx="2"/><text x="32" y="30">Reject</text></g>
+          </g>
+        </g>
+      </svg>
+      </div>
+
+      <div class="stage__floor">
+      <ol class="plates cc-container" id="plates">
+        {{range $i, $s := .Stations}}
+        <li class="plate" data-key="{{$s.Key}}" data-status="idle">
+          <span class="plate__num">{{inc $i}}</span>
+          <span class="plate__name">{{$s.Name}}</span>
+          <span class="plate__machine">{{$s.Machine}}</span>
+          <span class="plate__status"><i class="plate__lamp"></i><span class="plate__word">Idle</span> <span class="plate__time"></span></span>
+        </li>
+        {{end}}
+      </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="cc-section floor-section" aria-labelledby="log-title">
+    <div class="cc-container">
+      <div id="shift-log" hidden>
+        <div class="cc-section__head">
+          <h2 class="cc-section__title section-title" id="log-title">Shift log</h2>
+          <span class="cc-section__sub" id="log-sub">The last builds, read from the Jenkins JSON API</span>
+        </div>
+        <ol class="cards" id="cards"></ol>
+      </div>
+
+      <div id="commissioning" class="commission" hidden>
+        <div class="clipboard">
+          <div class="clipboard__clip" aria-hidden="true"></div>
+          <h2 class="clipboard__title">Commissioning the line</h2>
+          <p class="clipboard__lead" id="commission-lead">The product is deployed. Jenkins is provisioned. The steps marked Owner need the owner's Clever Cloud account. Then the first crate rides the belt.</p>
+          <ol class="checks" id="checks"></ol>
+        </div>
+        <div class="commission__aside">
+          <h3>Why the line waits</h3>
+          <p>Jenkins on Clever Cloud signs people in with their Clever Cloud account (SSO). The API token the factory floor reads with, and the Clever token the pipeline deploys with, can only be created by that person. Nothing is shared with the browser: both tokens stay on the server side.</p>
+          <p>Until then, play a sample run to see how a build moves through the four stations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cc-section" aria-label="Jenkins and Clever Cloud">
+    <div class="cc-container wall-grid">
+      <div class="cabinet">
+        <div class="cabinet__head">
+          <h2 class="cabinet__title">What the line asks Jenkins</h2>
+          <span class="cabinet__sub" id="cabinet-sub">{{if .Version}}Jenkins {{.Version}}{{else}}Jenkins JSON API{{end}}</span>
+        </div>
+        <p class="cabinet__auth"><code>Authorization: Basic ••••••••</code> The token stays on the server. These calls are made by the Go app, never by your browser.</p>
+        <ul class="calls" id="calls"></ul>
+
+        <h3 class="cabinet__subtitle">Runners on the floor</h3>
+        <ul class="runners" id="runners"></ul>
+        <p class="cabinet__note" id="runners-note">When a build starts, Jenkins asks Clever Cloud for a Docker app labelled <code>{{.RunnerLabel}}</code>, runs the job on it, then deletes it. You pay for the seconds the build runs.</p>
+      </div>
+
+      <div class="cc-platform">
+        <div class="cc-platform__head">
+          <h3>Running on Clever Cloud</h3>
+          <span class="cc-pill cc-pill--ok"><span class="cc-dot"></span>Product app</span>
+        </div>
+        {{with $.Platform}}
+        <dl class="cc-kv">
+          <div><dt>Application</dt><dd{{if not .AppName}} class="is-empty"{{end}}>{{or .AppName "set at deploy"}}</dd></div>
+          <div><dt>App ID</dt><dd{{if not .AppID}} class="is-empty"{{end}}>{{or .AppID "set at deploy"}}</dd></div>
+          <div><dt>Instance</dt><dd{{if not .Instance}} class="is-empty"{{end}}>{{if .Instance}}#{{.Instance}}{{if .PrettyName}} {{.PrettyName}}{{end}}{{else}}set at deploy{{end}}</dd></div>
+          <div><dt>Instance type</dt><dd{{if not .InstanceType}} class="is-empty"{{end}}>{{or .InstanceType "set at deploy"}}</dd></div>
+          <div><dt>Commit</dt><dd{{if not .Commit}} class="is-empty"{{end}}>{{or .Commit "set at deploy"}}</dd></div>
+          <div><dt>Deployment</dt><dd{{if not .Deployment}} class="is-empty"{{end}}>{{or .Deployment "set at deploy"}}</dd></div>
+        </dl>
+        {{end}}
+        <div class="cc-platform__foot">Variables injected by the platform: <a href="https://www.clever.cloud/developers/doc/reference/reference-environment-variables/" target="_blank" rel="noopener">reference</a>.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cc-section" aria-labelledby="blueprint-title">
+    <div class="cc-container">
+      <details class="blueprint">
+        <summary><span class="blueprint__title" id="blueprint-title">The blueprint</span><span class="blueprint__file">Jenkinsfile, at the root of this repository</span></summary>
+        <pre class="blueprint__sheet"><code>{{jenkinsfile}}</code></pre>
+      </details>
+    </div>
+  </section>
+  {{end}}
+</main>
+
+<footer class="cc-footer">
+  <div class="cc-container">
+    <div class="cc-footer__inner">
+      <div class="cc-footer__brand">
+        <a href="https://www.clever.cloud" target="_blank" rel="noopener" aria-label="Clever Cloud">{{svg "cc-logo.svg"}}</a>
+        <p>European, fully managed PaaS. Push your code, the platform runs it.</p>
+        <div class="cc-trust"><span>ISO 27001</span><span>HDS</span><span>HOSTED IN FRANCE</span></div>
+      </div>
+      <div>
+        <h4>Documentation</h4>
+        <ul>
+          <li><a href="https://www.clever.cloud/developers/doc/deploy/services/jenkins/" target="_blank" rel="noopener">Jenkins add-on</a></li>
+          <li><a href="https://www.clever.cloud/developers/doc/deploy/applications/golang/" target="_blank" rel="noopener">Go runtime</a></li>
+          <li><a href="https://www.clever.cloud/developers/doc/cli/" target="_blank" rel="noopener">Clever Tools CLI</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Go further</h4>
+        <ul>
+          <li><a class="is-cert" href="https://academy.clever.cloud/" target="_blank" rel="noopener">Clever Cloud certification ↗</a></li>
+          <li><a href="https://github.com/Vitiosum/demo-jenkins" target="_blank" rel="noopener">Source code on GitHub</a></li>
+          <li><a href="https://www.clever.cloud" target="_blank" rel="noopener">clever.cloud</a></li>
+        </ul>
+      </div>
+    </div>
+    <a class="foot-cert" href="https://academy.clever.cloud/" target="_blank" rel="noopener">
+      {{svg "cc-badge.svg"}}
+      <span><strong>Clever Cloud Academy</strong>Two official tracks, from cloud fundamentals to advanced deployment. The digital badge is issued as soon as you pass.</span>
+    </a>
+    <div class="cc-footer__bottom"><span>Demo built by the Clever Cloud presales team</span><span>© 2026 Clever Cloud</span></div>
+  </div>
+</footer>
+
+<script type="application/json" id="floor-data">{{.View}}</script>
+</body>
+</html>

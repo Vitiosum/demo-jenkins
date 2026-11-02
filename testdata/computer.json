@@ -1,0 +1,11 @@
+{
+ "_class": "hudson.model.ComputerSet",
+ "computer": [
+  {
+   "_class": "hudson.model.Hudson$MasterComputer",
+   "displayName": "contr\u00f4leur",
+   "idle": true,
+   "offline": false
+  }
+ ]
+}

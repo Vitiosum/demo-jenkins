@@ -1,0 +1,26 @@
+#!/bin/sh
+# Runs `go` with the pinned toolchain. The Jenkins runner image
+# (jenkins/inbound-agent) has no Go: download it once into .tools/.
+set -eu
+want="${GO_VERSION:?set GO_VERSION, e.g. go1.27.2}"
+here="$(cd "$(dirname "$0")/.." && pwd)"
+tools="$here/.tools"
+
+if command -v go >/dev/null 2>&1 && [ "$(go env GOVERSION)" = "$want" ]; then
+  exec go "$@"
+fi
+
+if [ ! -x "$tools/go/bin/go" ] || [ "$("$tools/go/bin/go" env GOVERSION)" != "$want" ]; then
+  os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+  case "$(uname -m)" in
+    x86_64 | amd64) arch=amd64 ;;
+    aarch64 | arm64) arch=arm64 ;;
+    *) echo "ci/go: unsupported CPU $(uname -m)" >&2; exit 1 ;;
+  esac
+  echo "ci/go: installing $want ($os-$arch) into .tools/" >&2
+  rm -rf "$tools/go" && mkdir -p "$tools"
+  curl -fsSL "https://go.dev/dl/$want.$os-$arch.tar.gz" | tar -xz -C "$tools"
+fi
+
+export GOPATH="$tools/gopath" GOCACHE="$tools/gocache"
+exec "$tools/go/bin/go" "$@"

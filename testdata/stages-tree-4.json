@@ -1,0 +1,72 @@
+{
+ "status": "ok",
+ "data": {
+  "stages": [
+   {
+    "id": "8",
+    "name": "Checkout",
+    "children": [],
+    "state": "success",
+    "type": "STAGE",
+    "title": "Checkout",
+    "isSequential": false,
+    "synthetic": false,
+    "placeholder": false,
+    "pauseDurationMillis": 0,
+    "totalDurationMillis": 598,
+    "startTimeMillis": 1793572199578,
+    "agent": "built-in",
+    "url": "/job/assembly-line/4/stages/?selected-node=8"
+   },
+   {
+    "id": "14",
+    "name": "Test",
+    "children": [],
+    "state": "success",
+    "type": "STAGE",
+    "title": "Test",
+    "isSequential": false,
+    "synthetic": false,
+    "placeholder": false,
+    "pauseDurationMillis": 0,
+    "totalDurationMillis": 1466,
+    "startTimeMillis": 1793572200256,
+    "agent": "built-in",
+    "url": "/job/assembly-line/4/stages/?selected-node=14"
+   },
+   {
+    "id": "20",
+    "name": "Build",
+    "children": [],
+    "state": "success",
+    "type": "STAGE",
+    "title": "Build",
+    "isSequential": false,
+    "synthetic": false,
+    "placeholder": false,
+    "pauseDurationMillis": 0,
+    "totalDurationMillis": 2003,
+    "startTimeMillis": 1793572201803,
+    "agent": "built-in",
+    "url": "/job/assembly-line/4/stages/?selected-node=20"
+   },
+   {
+    "id": "26",
+    "name": "Deploy",
+    "children": [],
+    "state": "skipped",
+    "type": "STAGE",
+    "title": "Deploy",
+    "isSequential": false,
+    "synthetic": false,
+    "placeholder": false,
+    "pauseDurationMillis": 0,
+    "totalDurationMillis": 73,
+    "startTimeMillis": 1793572203883,
+    "agent": "built-in",
+    "url": "/job/assembly-line/4/stages/?selected-node=26"
+   }
+  ],
+  "complete": true
+ }
+}
