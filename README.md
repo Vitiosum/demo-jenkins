@@ -8,6 +8,8 @@
 
 **Run it yourself.** The hosted demo was taken down after the presales review (November 2026). The steps in [Deploy on Clever Cloud](#deploy-on-clever-cloud) and [Connect the line](#connect-the-line-about-10-minutes-owner-of-the-clever-account) recreate it from scratch in about 25 minutes: 10 for the app and the Jenkins add-on, 10 to 15 for the owner steps in Jenkins.
 
+**Get certified.** This demo runs on Clever Cloud. To deploy your own apps the same way, get certified at the [Clever Cloud Academy](https://academy.clever.cloud/).
+
 ---
 
 ## What you see
