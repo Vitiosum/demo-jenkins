@@ -20,6 +20,7 @@ type FloorView struct {
 	Andon       string       `json:"andon"` // green, amber, red, off
 	Headline    string       `json:"headline"`
 	Detail      string       `json:"detail"`
+	NextStep    string       `json:"nextStep"` // the setup step still to do, empty once connected
 	JenkinsURL  string       `json:"jenkinsUrl"`
 	Version     string       `json:"version"`
 	Job         string       `json:"job"`
@@ -101,6 +102,7 @@ func buildFloor(cfg Config, p Platform, s Snapshot) FloorView {
 		v.Current = &v.Builds[0]
 	}
 	v.Andon, v.Headline = andon(s, v.Current)
+	v.NextStep = nextStep(s.State)
 	v.Checklist = checklist(cfg, s)
 	v.Unit = unit(p, s)
 	return v
@@ -201,7 +203,7 @@ func andon(s Snapshot, cur *BuildView) (string, string) {
 	case "unreachable":
 		return "off", "Jenkins is not answering."
 	case "awaiting-token":
-		return "amber", "Jenkins is up. The line is waiting for its API token."
+		return "amber", "Waiting for connection: Jenkins is up, the line has no API token yet."
 	case "unauthorized":
 		return "red", "Jenkins refused the line's API token."
 	case "no-job":
@@ -221,6 +223,22 @@ func andon(s Snapshot, cur *BuildView) (string, string) {
 		return "amber", fmt.Sprintf("Build #%d was stopped.", cur.Number)
 	}
 	return "red", fmt.Sprintf("Build #%d was rejected at %s.", cur.Number, strings.ToLower(stations[cur.Position].Machine))
+}
+
+// nextStep names the setup step that is missing while the line is not connected.
+// The page shows it under the andon board, /health/deep returns it with its 503.
+func nextStep(state string) string {
+	switch state {
+	case "unconfigured":
+		return "Create the Jenkins add-on and link it to this app (it injects JENKINS_TUNNEL), then restart."
+	case "unreachable":
+		return "Wait for the Jenkins add-on to finish starting, or check its address."
+	case "awaiting-token":
+		return "Do the README section \"Connect the line\": open Jenkins from the Clever Cloud Console, create an API token (your user › Security › API Token), set JENKINS_USER and JENKINS_API_TOKEN on this app, then restart."
+	case "unauthorized":
+		return "Create a new API token in Jenkins, set JENKINS_USER and JENKINS_API_TOKEN again on this app, then restart."
+	}
+	return ""
 }
 
 func checklist(cfg Config, s Snapshot) []CheckItem {

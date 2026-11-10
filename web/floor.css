@@ -99,6 +99,7 @@
 .hall[data-andon="amber"] .andon__text { color: #ffd27a; }
 .hall[data-andon="red"] .andon__text { color: #ff9c90; }
 .hall[data-andon="green"] .andon__text { color: #9ef0bd; }
+.andon__next { flex: 1 1 100%; margin: 0; font-size: 14px; line-height: 1.45; color: #c9d2ce; }
 .andon__side { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .andon__fresh { font-size: 13px; color: #8e9b96; }
 .andon__link { font-size: 14px; font-weight: 700; color: var(--enamel); border-bottom: 1px solid rgba(236, 229, 208, 0.35); }

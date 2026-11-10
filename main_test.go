@@ -97,7 +97,7 @@ func TestDeepHealthWaitsForToken(t *testing.T) {
 	defer jk.Close()
 	h := newServer(Config{JenkinsURL: jk.URL, Job: "assembly-line"}, Platform{}).routes()
 	rec := get(t, h, "/health/deep")
-	if rec.Code != http.StatusServiceUnavailable || !strings.Contains(rec.Body.String(), "awaiting-token") {
+	if rec.Code != http.StatusServiceUnavailable || !strings.Contains(rec.Body.String(), "awaiting-token") || !strings.Contains(rec.Body.String(), "Connect the line") {
 		t.Fatalf("/health/deep = %d %s", rec.Code, rec.Body)
 	}
 	v := floorOf(t, h)

@@ -116,6 +116,7 @@ func (s *server) healthDeep(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusOK, body)
 		return
 	}
+	body["nextStep"] = nextStep(snap.State)
 	writeJSON(w, http.StatusServiceUnavailable, body)
 }
 

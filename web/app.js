@@ -168,6 +168,8 @@ function render(v) {
     $("#andon-text").textContent = v.headline;
     drawLine(v.current);
   }
+  $("#andon-next").textContent = v.nextStep;
+  $("#andon-next").hidden = !v.nextStep;
   const hasBuilds = v.builds.length > 0;
   $("#shift-log").hidden = !hasBuilds;
   $("#commissioning").hidden = hasBuilds;

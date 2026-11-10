@@ -47,6 +47,7 @@
             <button class="andon__btn" type="button" id="sample-btn" hidden>Play a sample run</button>
             {{if .JenkinsURL}}<a class="andon__link" href="{{.JenkinsURL}}" target="_blank" rel="noopener" id="jenkins-link">Open Jenkins ↗</a>{{end}}
           </div>
+          <p class="andon__next" id="andon-next"{{if not .NextStep}} hidden{{end}}>{{.NextStep}}</p>
         </div>
       </div>
 

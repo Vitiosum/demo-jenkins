@@ -1,6 +1,8 @@
 # The Assembly Line — Jenkins on Clever Cloud
 
 > Jenkins tests and deploys this very page. Every build is a crate on a conveyor belt: checked out at goods in, tested at quality control, pressed into a binary, then shipped through the dock to Clever Cloud. The factory floor reads the Jenkins JSON API server side and draws the line live: the stations light up, the press strokes, the dock opens. Go standard library only, the **Jenkins add-on** with **Clever Cloud runners**, dressed in the Clever Brand Kit.
+>
+> **Before you start.** Deploying the app is not the end: until the section [Connect the line](#connect-the-line-about-10-minutes-owner-of-the-clever-account) is done, in Jenkins opened from the Clever Cloud Console (Clever Cloud SSO, owner of the account), the page says "Waiting for connection" with the step to do, and `/health/deep` answers 503 with the same step. Plan those 10 to 15 minutes before a demo.
 
 ![The factory floor, reading a Jenkins 2.580.2 that ran this Jenkinsfile five times](docs/screenshot-desktop.png)
 
@@ -49,7 +51,7 @@ clever deploy
 clever applications          # note the app id (app_…): the pipeline's PRODUCT_APP_ID
 ```
 
-The Go runtime builds the module (`go.mod`, Go 1.27) and starts the binary on port 8080. Linking the add-on injects `JENKINS_TUNNEL`: the app reads it to find the Jenkins web address on its own. The page is live straight away, in its "waiting for Jenkins" state, and `/health/deep` answers 503 until the read token of step 5 below is set. There is no setup script on the Clever side: the rest happens in Jenkins.
+The Go runtime builds the module (`go.mod`, Go 1.27) and starts the binary on port 8080. Linking the add-on injects `JENKINS_TUNNEL`: the app reads it to find the Jenkins web address on its own. The page is live straight away, in its "Waiting for connection" state: the andon board names the step to do, and `/health/deep` answers 503 with the state (`awaiting-token`) and that step (`nextStep`) until the read token of step 5 below is set. There is no setup script on the Clever side: the rest happens in Jenkins.
 
 ## Connect the line (about 10 minutes, owner of the Clever account)
 
@@ -110,7 +112,7 @@ The "Running on Clever Cloud" panel shows `CC_APP_NAME`, `APP_ID`, `INSTANCE_NUM
 | `GET /` | The factory floor (server-rendered, then refreshed every 5 s) |
 | `GET /api/floor` | The same reading as JSON |
 | `GET /health` | 200, never touches Jenkins |
-| `GET /health/deep` | 200 when the Jenkins API answers with the token, 503 with the reason otherwise |
+| `GET /health/deep` | 200 when the Jenkins API answers with the token, 503 with the reason and the step to do (`nextStep`) otherwise |
 
 Jenkins is read at most once every 4 s whatever the number of viewers (every 15 s while it is not connected). The calls: `/job/<job>/api/json` (builds, commit, trigger), `/job/<job>/wfapi/runs` (stages, Pipeline Stage View plugin) with a fallback to `/job/<job>/<n>/stages/tree` (Pipeline Graph View plugin), `/computer/api/json` (runners), `/label/clever-go/api/json` (runner template configured) and the credential ids (never their values).
 
